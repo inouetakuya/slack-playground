@@ -30,6 +30,7 @@ GEM
       gli
       hashie
       websocket-driver
+    thor (0.20.0)
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
@@ -44,6 +45,7 @@ DEPENDENCIES
   dotenv
   pry
   slack-ruby-client
+  thor
 
 BUNDLED WITH
    1.16.1
