@@ -36,3 +36,9 @@ bundle exec pry
 ```
 bundle exec thor task:auth:test
 ```
+
+## Testing
+
+```
+bundle exec rspec
+```

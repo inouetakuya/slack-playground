@@ -1,3 +1,5 @@
+require 'thor'
+
 module Task
   class Auth < Thor
     desc 'test', 'Authentication test for Slack API'
