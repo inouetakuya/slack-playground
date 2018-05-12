@@ -1,1 +1,3 @@
---require spec_helper
+--require spec_helper \
+--format progress \
+-- $(echo "${TEST_FILES}" | sed -e 's/\n/\\n/' -e 's/ /\ /')
