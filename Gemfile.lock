@@ -37,6 +37,8 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
+    rspec_junit_formatter (0.3.0)
+      rspec-core (>= 2, < 4, != 2.12.0)
     slack-ruby-client (0.11.1)
       activesupport
       faraday (>= 0.9)
@@ -59,6 +61,7 @@ DEPENDENCIES
   dotenv
   pry
   rspec
+  rspec_junit_formatter
   slack-ruby-client
   thor
 
