@@ -1,6 +1,8 @@
 slack-playground
 ================
 
+[![CircleCI](https://circleci.com/gh/inouetakuya/slack-playground.svg?style=svg&circle-token=eb782bbce318b9ff2ea0382b44c1fc62f3e58329)](https://circleci.com/gh/inouetakuya/slack-playground)
+
 Playground with Slack
 
 ## Requirements
