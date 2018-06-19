@@ -9,4 +9,5 @@
 /vendor/
 
 /.env
+/spec/tmp/
 /spec/examples.txt

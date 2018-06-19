@@ -1,9 +1,17 @@
 require 'dotenv/load'
 require 'pry'
 require 'slack-ruby-client'
+require 'yaml'
 
 module SlackPlayground
   ROOT_PATH = File.expand_path('../', __dir__)
+
+  CHANNELS_DIR =
+    if ENV['ENV'] == 'test'
+      File.join(SlackPlayground::ROOT_PATH, 'spec/tmp/channels')
+    else
+      File.join(SlackPlayground::ROOT_PATH, 'tmp/channels')
+    end
 end
 
 Slack.configure do |config|
