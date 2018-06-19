@@ -5,6 +5,7 @@ class HistoryExporter
 
   def perform!
     # Not yet implemented
+    export
   end
 
   private
