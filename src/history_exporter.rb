@@ -49,7 +49,11 @@ class HistoryExporter
   end
 
   def file_path(latest)
-    File.join(SlackPlayground::CHANNELS_DIR, @channel.id, "history_#{latest}.yml")
+    if latest
+      File.join(SlackPlayground::CHANNELS_DIR, @channel.id, "history_#{latest}.yml")
+    else
+      File.join(SlackPlayground::CHANNELS_DIR, @channel.id, 'history_now.yml')
+    end
   end
 
   def client
