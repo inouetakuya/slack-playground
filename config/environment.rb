@@ -19,6 +19,7 @@ Slack.configure do |config|
 end
 
 Dir[
+  File.join(__dir__, '../lib/**/*.rb'),
   File.join(__dir__, '../src/**/*.rb'),
 ].each do |file|
   require file
