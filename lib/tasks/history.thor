@@ -1,11 +1,11 @@
 require 'thor'
 
 module Task
-  class Channel < Thor
-    desc 'history', 'Export the history of channel to YAML files'
+  class History < Thor
+    desc 'export', 'Export the history of channel to YAML files'
     method_option :channel, type: :string, desc: 'Channel name', required: true
     method_option :force, type: :boolean, default: false, desc: 'Skip asking questions'
-    def history
+    def export
       unless options[:force] || yes?("Export the history of channel to YAML files? (y/N)", :yellow)
         return say 'Task is aborted'
       end
