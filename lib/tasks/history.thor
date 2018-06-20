@@ -9,6 +9,8 @@ module Task
       Dir[File.join(SlackPlayground::CHANNELS_DIR, '**/history_*.yml')].each do |history_yaml_path|
         history = YAML.load_file(history_yaml_path)
         history.messages.each do |message|
+          next if message.username == 'unknown'
+
           m = ::Message.new(message)
 
           if result[m.ym]
