@@ -2,6 +2,26 @@ require 'thor'
 
 module Task
   class History < Thor
+    desc 'stats', 'Stats of the history'
+    def stats
+      result = {}
+
+      Dir[File.join(SlackPlayground::CHANNELS_DIR, '**/history_*.yml')].each do |history_yaml_path|
+        history = YAML.load_file(history_yaml_path)
+        history.messages.each do |message|
+          m = ::Message.new(message)
+
+          if result[m.ym]
+            result[m.ym] += 1
+          else
+            result[m.ym] = 1
+          end
+        end
+      end
+
+      puts result.inspect
+    end
+
     desc 'export', 'Export the history of channel to YAML files'
     method_option :channel, type: :string, desc: 'Channel name', required: true
     method_option :force, type: :boolean, default: false, desc: 'Skip asking questions'
