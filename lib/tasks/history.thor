@@ -19,7 +19,9 @@ module Task
         end
       end
 
-      puts result.inspect
+      result.sort.each do |ym, count|
+        puts "#{ym}: #{count}"
+      end
     end
 
     desc 'export', 'Export the history of channel to YAML files'
