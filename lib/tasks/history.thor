@@ -10,19 +10,24 @@ module Task
         history = YAML.load_file(history_yaml_path)
         history.messages.each do |message|
           next if message.username == 'unknown'
+          next if message.text.blank?
 
           m = ::Message.new(message)
 
           if result[m.ym]
-            result[m.ym] += 1
+            if m.reaction?
+              result[m.ym][:reaction] += 1
+            else
+              result[m.ym][:message] += 1
+            end
           else
-            result[m.ym] = 1
+            result[m.ym] = { message: 0, reaction: 0 }
           end
         end
       end
 
       result.sort.each do |ym, count|
-        puts "#{ym}: #{count}"
+        puts "#{ym} => { message: #{count[:message]}, reaction: #{count[:reaction]} }"
       end
     end
 
