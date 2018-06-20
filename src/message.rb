@@ -7,6 +7,20 @@ class Message
     @message.text.match /\A\(\w+\)\z/
   end
 
+  def reactions
+    @message.reactions
+  end
+
+  def reactions_count
+    if @message.reactions
+      @message.reactions.inject(0) { |sum, reaction|
+        sum += reaction.count
+      }
+    else
+      0
+    end
+  end
+
   def timestamp
     @message.ts.split('.')[0].to_i
   end

@@ -19,6 +19,7 @@ module Task
               result[m.ym][:reaction] += 1
             else
               result[m.ym][:message] += 1
+              result[m.ym][:reaction] += m.reactions_count
             end
           else
             result[m.ym] = { message: 0, reaction: 0 }
