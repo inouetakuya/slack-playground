@@ -30,6 +30,10 @@ module Task
       result.sort.each do |ym, count|
         puts "#{ym} => { message: #{count[:message]}, reaction: #{count[:reaction]}, sum: #{count[:message] + count[:reaction]} }"
       end
+
+      result.sort.each do |ym, count|
+        puts "#{ym}, #{count[:message]}, #{count[:reaction]}, #{count[:message] + count[:reaction]}"
+      end
     end
 
     desc 'export', 'Export the history of channel to YAML files'
