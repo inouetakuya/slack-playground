@@ -13,6 +13,8 @@ module Task
       channel = ::Channel.fetch_by_name(options[:channel])
       exporter = HistoryExporter.new(channel)
       exporter.perform!
+
+      say "History of channel (#{options[:channel]}) is exported successfully"
     end
   end
 end
