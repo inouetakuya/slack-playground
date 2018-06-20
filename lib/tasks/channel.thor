@@ -16,5 +16,16 @@ module Task
 
       say "History of channel (#{options[:channel]}) is exported successfully"
     end
+
+    desc 'clear', 'Remove channel history YAML files'
+    method_option :force, type: :boolean, default: false, desc: 'Skip asking questions'
+    def clear
+      unless options[:force] || yes?("Remove channel history YAML files? (y/N)", :yellow)
+        return say 'Task is aborted'
+      end
+
+      FileUtils.rm_rf(SlackPlayground::CHANNELS_DIR) if File.exist?(SlackPlayground::CHANNELS_DIR)
+      say 'Channel history YAML files are removed'
+    end
   end
 end
