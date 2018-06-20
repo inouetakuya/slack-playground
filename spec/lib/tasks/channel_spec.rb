@@ -6,7 +6,7 @@ describe Task::Channel do
 
     it 'Channel の発言履歴を YAML ファイルとして保存する' do
       expect {
-        Task::Channel.new.invoke(:history, [], channel: 'livesense-engineers', force: true)
+        Task::Channel.new.invoke(:history, [], channel: 'eng-board', force: true)
       }.to change { Dir[File.join(SlackPlayground::CHANNELS_DIR, '**/history_*.yml')].size }
     end
   end

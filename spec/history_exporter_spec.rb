@@ -1,6 +1,6 @@
 describe HistoryExporter do
   let(:exporter) { HistoryExporter.new(channel) }
-  let(:channel) { Channel.fetch_by_name('livesense-engineers') }
+  let(:channel) { Channel.fetch_by_name('eng-board') }
 
   describe '#perform!' do
     after do
