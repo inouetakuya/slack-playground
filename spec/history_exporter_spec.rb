@@ -3,7 +3,15 @@ describe HistoryExporter do
   let(:channel) { Channel.fetch_by_name('livesense-engineers') }
 
   describe '#perform!' do
-    it 'Channel の発言を YAML ファイルとして保存する'
+    after do
+      FileUtils.rm_rf(Dir[File.join(SlackPlayground::CHANNELS_DIR, '*')])
+    end
+
+    it 'Channel の発言履歴を YAML ファイルとして保存する' do
+      expect {
+        exporter.perform!
+      }.to change { Dir[File.join(SlackPlayground::CHANNELS_DIR, '**/history_*.yml')].size }
+    end
   end
 
   describe '#export' do
@@ -11,17 +19,17 @@ describe HistoryExporter do
       FileUtils.rm_rf(Dir[File.join(SlackPlayground::CHANNELS_DIR, '*')])
     end
 
-    it 'history を YAML ファイルに出力する' do
+    it 'Channel の発言履歴を YAML ファイルに出力する' do
       expect {
-        exporter.send(:export)
-      }.to change { Dir[File.join(SlackPlayground::CHANNELS_DIR, '**/history.yml')].size }
+        exporter.send(:export, latest: nil)
+      }.to change { Dir[File.join(SlackPlayground::CHANNELS_DIR, '**/history_*.yml')].size }
     end
   end
 
   describe '#fetch' do
-    it 'Channel の発言を取得できる' do
-      response = exporter.send(:fetch)
-      expect(response.ok).to be_truthy
+    it 'Channel の発言履歴を取得できる' do
+      response = exporter.send(:fetch, latest: nil)
+      expect(response.ok?).to be_truthy
     end
   end
 end

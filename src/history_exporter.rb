@@ -4,8 +4,12 @@ class HistoryExporter
   end
 
   def perform!
-    # Not yet implemented
-    export
+    response = { 'messages' => [{ ts: nil }] }
+
+    loop do
+      response = export(latest: response['messages'][-1]['ts'])
+      break unless response.has_more?
+    end
 
   rescue => e
     SlackPlayground.logger.error("Caught exception: #{e.class}, channel_id: #{@channel.id}, channel_name: #{@channel.name}", with_put: true)
@@ -18,26 +22,34 @@ class HistoryExporter
 
   private
 
-  def export
-    response = fetch
+  def export(latest:)
+    response = fetch(latest: latest)
+    path = file_path(latest)
 
     if response.ok?
-      FileUtils.mkdir_p(File.dirname(file_path))
+      FileUtils.mkdir_p(File.dirname(path))
 
-      File.open(file_path, 'w') do |file|
+      File.open(path, 'w') do |file|
         file.write(response.to_yaml)
       end
     else
       fail "Fetch Error, error: #{response.error}"
     end
+
+    response
   end
 
-  def fetch
-    client.channels_history(channel: @channel.id)
+  def fetch(latest:)
+    client.channels_history(
+      channel: @channel.id,
+      count: 1000,
+      inclusive: false,
+      latest: latest, unreads: false,
+    )
   end
 
-  def file_path
-    File.join(SlackPlayground::CHANNELS_DIR, @channel.id, 'history.yml')
+  def file_path(latest)
+    File.join(SlackPlayground::CHANNELS_DIR, @channel.id, "history_#{latest}.yml")
   end
 
   def client
