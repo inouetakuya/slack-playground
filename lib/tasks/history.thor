@@ -28,7 +28,7 @@ module Task
       end
 
       result.sort.each do |ym, count|
-        puts "#{ym} => { message: #{count[:message]}, reaction: #{count[:reaction]} }"
+        puts "#{ym} => { message: #{count[:message]}, reaction: #{count[:reaction]}, sum: #{count[:message] + count[:reaction]} }"
       end
     end
 
