@@ -61,6 +61,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   colorize
   dotenv
   pry
